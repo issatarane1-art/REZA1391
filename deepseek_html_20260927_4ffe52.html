@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ابزارستان | ۵۰+ ابزار آنلاین رایگان فارسی - صوت به متن، عکس به متن و...</title>
+
+<!-- ===== SEO ===== -->
+<meta name="description" content="ابزارستان: بیش از ۵۰ ابزار آنلاین رایگان فارسی شامل تبدیل صوت به متن، عکس به متن (OCR)، تبدیل فرمت فایل، فشرده‌سازی، ویرایش عکس و ده‌ها ابزار کاربردی دیگر. بدون نصب، بدون ثبت‌نام.">
+<meta name="keywords" content="صوت به متن, عکس به متن, OCR فارسی, تبدیل PDF, فشرده سازی عکس, ابزار آنلاین, ابزار رایگان, ویرایش عکس آنلاین, تبدیل فرمت">
+<meta name="author" content="ابزارستان">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://example.com/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="ابزارستان | ۵۰+ ابزار آنلاین رایگان">
+<meta property="og:description" content="تبدیل صوت به متن، عکس به متن و ده‌ها ابزار رایگان دیگر">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fa_IR">
+
+<!-- Schema.org for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "ابزارستان",
+  "url": "https://example.com/",
+  "inLanguage": "fa-IR",
+  "description": "۵۰+ ابزار آنلاین رایگان فارسی"
+}
+</script>
+
+<!-- فونت فارسی -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Vazirmatn', sans-serif; }
+
+:root{
+  --bg:#0a0a14;
+  --bg2:#12122a;
+  --card:#1a1a2e;
+  --accent:#00f0ff;
+  --accent2:#b026ff;
+  --text:#eaeaea;
+  --muted:#8888aa;
+  --border:rgba(0,240,255,0.15);
+}
+
+body{
+  background: radial-gradient(ellipse at top, #1a1a3e 0%, var(--bg) 60%);
+  color: var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  line-height:1.8;
+}
+
+/* ===== Navbar ===== */
+nav{
+  position:sticky; top:0; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 5%;
+  background:rgba(10,10,20,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.logo{
+  font-size:1.6rem; font-weight:900;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  display:flex; align-items:center; gap:10px;
+}
+.logo span{ font-size:1.8rem; }
+nav ul{ display:flex; gap:28px; list-style:none; }
+nav a{ color:var(--muted); text-decoration:none; font-weight:500; transition:.3s; }
+nav a:hover{ color:var(--accent); }
+
+/* ===== Hero ===== */
+.hero{
+  text-align:center;
+  padding:90px 5% 60px;
+  position:relative;
+}
+.hero::before{
+  content:'';
+  position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:600px; height:600px;
+  background:radial-gradient(circle, rgba(176,38,255,0.25), transparent 70%);
+  filter:blur(60px);
+  z-index:-1;
+}
+.hero h1{
+  font-size:clamp(2rem,5vw,3.8rem);
+  font-weight:900;
+  margin-bottom:20px;
+  line-height:1.3;
+}
+.hero h1 .grad{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero p{
+  color:var(--muted); font-size:1.15rem;
+  max-width:700px; margin:0 auto 35px;
+}
+.search-box{
+  max-width:600px; margin:0 auto; position:relative;
+}
+.search-box input{
+  width:100%; padding:18px 55px 18px 25px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:50px;
+  color:var(--text); font-size:1rem;
+  outline:none; transition:.3s;
+}
+.search-box input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 30px rgba(0,240,255,0.2);
+}
+.search-box::before{
+  content:'🔍'; position:absolute; right:22px; top:50%;
+  transform:translateY(-50%); font-size:1.2rem;
+}
+
+/* ===== Stats ===== */
+.stats{
+  display:flex; justify-content:center; gap:60px;
+  flex-wrap:wrap; margin:50px auto; padding:0 5%;
+}
+.stat{ text-align:center; }
+.stat h3{
+  font-size:2.2rem; font-weight:900;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.stat p{ color:var(--muted); font-size:.9rem; }
+
+/* ===== Categories ===== */
+.filters{
+  display:flex; justify-content:center; gap:10px;
+  flex-wrap:wrap; padding:20px 5%;
+}
+.filter-btn{
+  padding:10px 22px; border-radius:50px;
+  background:var(--card); border:1px solid var(--border);
+  color:var(--muted); cursor:pointer;
+  transition:.3s; font-family:inherit; font-size:.9rem;
+}
+.filter-btn:hover, .filter-btn.active{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#0a0a14; border-color:transparent;
+  font-weight:700;
+}
+
+/* ===== Grid ===== */
+.container{ max-width:1300px; margin:0 auto; padding:30px 5% 80px; }
+.section-title{
+  font-size:1.8rem; font-weight:700; margin:20px 0 30px;
+  display:flex; align-items:center; gap:12px;
+}
+.section-title::before{
+  content:''; width:5px; height:30px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
+  border-radius:5px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:linear-gradient(145deg,var(--card),var(--bg2));
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:26px 22px;
+  cursor:pointer;
+  transition:.4s cubic-bezier(.2,.8,.2,1);
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:'';
+  position:absolute; top:0; right:0;
+  width:100%; height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transform:scaleX(0); transform-origin:right;
+  transition:.4s;
+}
+.card:hover::before{ transform:scaleX(1); }
+.card:hover{
+  transform:translateY(-8px);
+  border-color:var(--accent);
+  box-shadow:0 20px 40px rgba(0,240,255,0.15);
+}
+.card-icon{
+  font-size:2.2rem; margin-bottom:14px;
+  display:inline-block;
+  filter:drop-shadow(0 0 12px rgba(0,240,255,0.4));
+}
+.card h3{
+  font-size:1.15rem; font-weight:700; margin-bottom:8px;
+  color:var(--text);
+}
+.card p{
+  font-size:.85rem; color:var(--muted); line-height:1.7;
+}
+.card .badge{
+  position:absolute; top:16px; left:16px;
+  font-size:.7rem; padding:3px 10px;
+  border-radius:20px; font-weight:700;
+  background:rgba(0,240,255,0.15);
+  color:var(--accent);
+}
+.card .badge.hot{
+  background:rgba(255,60,100,0.15);
+  color:#ff5c7c;
+}
+
+/* ===== Footer ===== */
+footer{
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  padding:50px 5% 30px;
+  text-align:center;
+}
+footer p{ color:var(--muted); font-size:.9rem; }
+footer .links{
+  display:flex; justify-content:center; gap:25px;
+  flex-wrap:wrap; margin-bottom:25px;
+}
+footer a{ color:var(--accent); text-decoration:none; }
+
+/* ===== Responsive ===== */
+@media (max-width:768px){
+  nav ul{ display:none; }
+  .stats{ gap:30px; }
+  .hero{ padding:60px 5% 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav>
+  <div class="logo"><span>⚡</span> ابزارستان</div>
+  <ul>
+    <li><a href="#tools">ابزارها</a></li>
+    <li><a href="#features">ویژگی‌ها</a></li>
+    <li><a href="#about">درباره</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <h1>بیش از <span class="grad">۵۰ ابزار آنلاین</span><br>رایگان و حرفه‌ای</h1>
+  <p>تبدیل صوت به متن، عکس به متن (OCR)، تبدیل فرمت، ویرایش فایل و ده‌ها ابزار دیگر — همه در یک‌جا، بدون نصب و بدون ثبت‌نام.</p>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="جستجوی ابزار... مثلاً: صوت به متن">
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<div class="stats">
+  <div class="stat"><h3>۵۰+</h3><p>ابزار تخصصی</p></div>
+  <div class="stat"><h3>۱۰۰٪</h3><p>رایگان</p></div>
+  <div class="stat"><h3>∞</h3><p>استفاده نامحدود</p></div>
+  <div class="stat"><h3>۲۴/۷</h3><p>در دسترس</p></div>
+</div>
+
+<!-- ===== FILTERS ===== -->
+<div class="filters" id="filters">
+  <button class="filter-btn active" data-cat="all">همه</button>
+  <button class="filter-btn" data-cat="text">متن و صدا</button>
+  <button class="filter-btn" data-cat="image">تصویر</button>
+  <button class="filter-btn" data-cat="file">فایل و PDF</button>
+  <button class="filter-btn" data-cat="dev">برنامه‌نویسی</button>
+  <button class="filter-btn" data-cat="utility">کاربردی</button>
+</div>
+
+<!-- ===== TOOLS GRID ===== -->
+<div class="container" id="tools">
+  <h2 class="section-title">🛠️ همه ابزارها</h2>
+  <div class="grid" id="toolGrid"></div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="links">
+    <a href="#">درباره ما</a>
+    <a href="#">تماس</a>
+    <a href="#">حریم خصوصی</a>
+    <a href="#">قوانین</a>
+  </div>
+  <p>© ۱۴۰۴ ابزارستان — ساخته شده با ❤️ برای کاربران فارسی‌زبان</p>
+</footer>
+
+<script>
+/* ========== لیست ۵۰ ابزار ========== */
+const tools = [
+  // متن و صدا
+  {icon:'🎤', title:'صوت به متن', desc:'تبدیل گفتار به نوشتار با دقت بالا', cat:'text', hot:true},
+  {icon:'🔊', title:'متن به صوت', desc:'تبدیل متن به فایل صوتی طبیعی', cat:'text'},
+  {icon:'📝', title:'خلاصه‌ساز متن', desc:'خلاصه هوشمند مقالات طولانی', cat:'text', hot:true},
+  {icon:'🌐', title:'مترجم متن', desc:'ترجمه بین ۵۰+ زبان زنده', cat:'text'},
+  {icon:'✍️', title:'اصلاح املا', desc:'غلط‌یابی و اصلاح خودکار متن', cat:'text'},
+  {icon:'📖', title:'شمارش کلمات', desc:'شمارش کلمات، حروف و جملات', cat:'text'},
+  {icon:'🔤', title:'تغییر حروف', desc:'تبدیل حروف بزرگ/کوچک', cat:'text'},
+  {icon:'💬', title:'تحلیل احساسات', desc:'تشخیص احساس متن فارسی', cat:'text'},
+
+  // تصویر
+  {icon:'🖼️', title:'عکس به متن (OCR)', desc:'استخراج متن از تصویر با دقت بالا', cat:'image', hot:true},
+  {icon:'🗜️', title:'فشرده‌سازی عکس', desc:'کاهش حجم عکس بدون افت کیفیت', cat:'image'},
+  {icon:'✂️', title:'برش عکس', desc:'کراپ و برش آنلاین تصویر', cat:'image'},
+  {icon:'🔄', title:'چرخش عکس', desc:'چرخش و آینه کردن تصویر', cat:'image'},
+  {icon:'🎨', title:'حذف پس‌زمینه', desc:'حذف خودکار پس‌زمینه عکس', cat:'image', hot:true},
+  {icon:'📐', title:'تغییر اندازه عکس', desc:'تغییر ابعاد به سایز دلخواه', cat:'image'},
+  {icon:'💧', title:'واترمارک عکس', desc:'افزودن لوگو یا متن روی عکس', cat:'image'},
+  {icon:'🖌️', title:'ویرایشگر عکس', desc:'فیلتر، روشنایی و کنتراست', cat:'image'},
+  {icon:'🖼️', title:'تبدیل فرمت عکس', desc:'JPG, PNG, WebP, GIF و...', cat:'image'},
+  {icon:'📸', title:'گالری‌ساز', desc:'ساخت کلاژ و گالری عکس', cat:'image'},
+  {icon:'🎭', title:'حذف شیء از عکس', desc:'پاک کردن اشیای اضافی', cat:'image'},
+
+  // فایل و PDF
+  {icon:'📄', title:'PDF به Word', desc:'تبدیل فایل PDF به Word', cat:'file', hot:true},
+  {icon:'📑', title:'Word به PDF', desc:'تبدیل Word به PDF آنلاین', cat:'file'},
+  {icon:'🖼️', title:'عکس به PDF', desc:'ترکیب چند عکس در یک PDF', cat:'file'},
+  {icon:'✂️', title:'برش PDF', desc:'جدا کردن صفحات PDF', cat:'file'},
+  {icon:'🔗', title:'ادغام PDF', desc:'ترکیب چند PDF با هم', cat:'file'},
+  {icon:'🗜️', title:'فشرده‌سازی PDF', desc:'کاهش حجم فایل PDF', cat:'file'},
+  {icon:'🔒', title:'رمزگذاری PDF', desc:'قفل کردن PDF با پسورد', cat:'file'},
+  {icon:'📊', title:'Excel به PDF', desc:'تبدیل اکسل به PDF', cat:'file'},
+  {icon:'📽️', title:'PowerPoint به PDF', desc:'تبدیل پاورپوینت به PDF', cat:'file'},
+  {icon:'📁', title:'تبدیل فرمت فایل', desc:'تبدیل بین فرمت‌های مختلف', cat:'file'},
+
+  // برنامه‌نویسی
+  {icon:'💻', title:'زیبا‌ساز کد', desc:'فرمت و زیباسازی کد', cat:'dev'},
+  {icon:'🔐', title:'تولید رمز عبور', desc:'ساخت پسورد قوی و امن', cat:'dev'},
+  {icon:'#️⃣', title:'تولید UUID', desc:'ساخت شناسه یکتا', cat:'dev'},
+  {icon:'🔢', title:'تبدیل مبنا', desc:'تبدیل باینری، هگز و...', cat:'dev'},
+  {icon:'📋', title:'JSON Formatter', desc:'قالب‌بندی و اعتبارسنجی JSON', cat:'dev'},
+  {icon:'🎨', title:'انتخاب رنگ', desc:'پالت رنگ و کد Hex', cat:'dev'},
+  {icon:'🔍', title:'تست Regex', desc:'آزمایش الگوهای Regex', cat:'dev'},
+  {icon:'📏', title:'محاسبه‌گر CSS', desc:'px به rem و برعکس', cat:'dev'},
+  {icon:'🔗', title:'کوتاه‌کننده لینک', desc:'کوتاه کردن URL طولانی', cat:'dev'},
+  {icon:'📱', title:'تولید QR Code', desc:'ساخت QR کد سفارشی', cat:'dev', hot:true},
+
+  // کاربردی
+  {icon:'🧮', title:'ماشین حساب', desc:'محاسبه‌گر پیشرفته آنلاین', cat:'utility'},
+  {icon:'📅', title:'تقویم شمسی', desc:'تقویم و تبدیل تاریخ', cat:'utility'},
+  {icon:'⏰', title:'کرنومتر', desc:'زمان‌سنج و تایمر آنلاین', cat:'utility'},
+  {icon:'🎲', title:'تاس و قرعه‌کشی', desc:'انتخاب تصادفی', cat:'utility'},
+  {icon:'💰', title:'محاسبه‌گر وام', desc:'محاسبه اقساط و سود', cat:'utility'},
+  {icon:'📊', title:'نمودار ساز', desc:'ساخت نمودار و چارت', cat:'utility'},
+  {icon:'🔢', title:'محاسبه BMI', desc:'شاخص توده بدنی', cat:'utility'},
+  {icon:'🌡️', title:'تبدیل واحد', desc:'دما، طول، وزن و...', cat:'utility'},
+  {icon:'📱', title:'تست سرعت تایپ', desc:'سنجش سرعت تایپ فارسی', cat:'utility'},
+  {icon:'🎵', title:'تبدیل فرمت صوتی', desc:'MP3, WAV, OGG و...', cat:'utility'},
+  {icon:'🎬', title:'تبدیل فرمت ویدیو', desc:'MP4, AVI, MKV و...', cat:'utility'},
+  {icon:'📷', title:'ضبط صفحه', desc:'ضبط ویدیو از صفحه نمایش', cat:'utility'},
+];
+
+/* ========== رندر کارت‌ها ========== */
+const grid = document.getElementById('toolGrid');
+function renderTools(filter='all', search=''){
+  grid.innerHTML = '';
+  const filtered = tools.filter(t => {
+    const matchCat = filter === 'all' || t.cat === filter;
+    const matchSearch = t.title.includes(search) || t.desc.includes(search);
+    return matchCat && matchSearch;
+  });
+  if(filtered.length === 0){
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#8888aa;padding:40px;">ابزاری یافت نشد 😔</p>';
+    return;
+  }
+  filtered.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      ${t.hot ? '<span class="badge hot">🔥 داغ</span>' : ''}
+      <div class="card-icon">${t.icon}</div>
+      <h3>${t.title}</h3>
+      <p>${t.desc}</p>
+    `;
+    grid.appendChild(card);
+  });
+}
+renderTools();
+
+/* ========== فیلتر دسته‌بندی ========== */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTools(btn.dataset.cat, document.getElementById('searchInput').value.trim());
+  });
+});
+
+/* ========== جستجوی زنده ========== */
+document.getElementById('searchInput').addEventListener('input', e => {
+  const activeCat = document.querySelector('.filter-btn.active').dataset.cat;
+  renderTools(activeCat, e.target.value.trim());
+});
+</script>
+</body>
+</html>
