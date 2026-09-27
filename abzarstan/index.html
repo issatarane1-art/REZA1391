@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ابزارستان | ۵۰+ ابزار آنلاین رایگان فارسی</title>
+<meta name="description" content="۵۰+ ابزار آنلاین رایگان فارسی: صوت به متن، عکس به متن، حذف پس‌زمینه، QR کد و...">
+<meta name="keywords" content="ابزار آنلاین, صوت به متن, عکس به متن, OCR فارسی, QR کد">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://yourdomain.netlify.app/">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="loader-logo">⚡ ابزارستان</div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- Cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<!-- Progress -->
+<div class="progress-top" id="progressTop"></div>
+
+<!-- Particles -->
+<canvas id="particles"></canvas>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <div class="logo">
+    <span class="logo-icon">⚡</span>
+    <span class="logo-text">ابزارستان</span>
+  </div>
+  <ul>
+    <li><a href="#tools">ابزارها</a></li>
+    <li><a href="#features">ویژگی‌ها</a></li>
+    <li><a href="#contact">تماس</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle">
+    <span class="toggle-ball">🌙</span>
+  </button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    <span>۵۰+ ابزار رایگان</span>
+  </div>
+
+  <h1>
+    <div class="line"><span>ابزارهای هوشمند</span></div>
+    <div class="line"><span class="grad-text">در یک سایت</span></div>
+  </h1>
+
+  <p class="hero-sub">
+    تبدیل <span class="typing-wrap" id="typing"></span><span class="cursor-blink"></span>
+    <br>رایگان، بدون نصب، بدون ثبت‌نام
+  </p>
+
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="جستجوی ابزار...">
+    <span class="icon">🔍</span>
+  </div>
+
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">
+      <span>✨ مشاهده ابزارها</span>
+    </button>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stat"><h3>۵۰+</h3><p>ابزار</p></div>
+  <div class="stat"><h3>۱۰۰٪</h3><p>رایگان</p></div>
+  <div class="stat"><h3>۲۴/۷</h3><p>در دسترس</p></div>
+</div>
+
+<!-- Tools -->
+<section class="section" id="tools">
+  <div class="section-head">
+    <h2>ابزارهای <span class="grad-text">محبوب</span></h2>
+    <p>هر ابزاری که لازم داری</p>
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="filter-btn active" data-cat="all">همه</button>
+    <button class="filter-btn" data-cat="text">متن و صدا</button>
+    <button class="filter-btn" data-cat="image">تصویر</button>
+    <button class="filter-btn" data-cat="dev">برنامه‌نویسی</button>
+    <button class="filter-btn" data-cat="utility">کاربردی</button>
+  </div>
+
+  <div class="grid" id="toolGrid"></div>
+</section>
+
+<!-- Features -->
+<section class="section" id="features">
+  <div class="section-head">
+    <h2>چرا <span class="grad-text">ابزارستان</span>؟</h2>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <h4>سریع</h4>
+      <p>بدون انتظار و صف</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔒</div>
+      <h4>امن</h4>
+      <p>فایل‌هات محرمانه می‌مونن</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">💎</div>
+      <h4>رایگان</h4>
+      <p>برای همیشه</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🇮🇷</div>
+      <h4>فارسی</h4>
+      <p>پشتیبانی کامل</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+  <p>© ۱۴۰۴ ابزارستان — ساخته شده با ❤️</p>
+</footer>
+
+<button class="float-btn" id="floatTop">↑</button>
+
+<script src="script.js"></script>
+</body>
+</html>
