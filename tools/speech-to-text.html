@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تبدیل صوت به متن آنلاین رایگان فارسی | ابزارستان</title>
+<meta name="description" content="تبدیل صوت به متن فارسی به صورت آنلاین و رایگان. پشتیبانی از میکروفون و فایل صوتی، بدون نصب و بدون ثبت‌نام.">
+<meta name="keywords" content="صوت به متن, تبدیل صوت به متن, speech to text فارسی, تایپ صوتی">
+<link rel="canonical" href="https://yourdomain.com/tools/speech-to-text.html">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif}
+body{background:radial-gradient(ellipse at top,#1a1a3e,#0a0a14 60%);color:#eaeaea;min-height:100vh;padding:20px}
+.container{max-width:900px;margin:0 auto}
+.back{color:#00f0ff;text-decoration:none;display:inline-block;margin-bottom:20px}
+h1{font-size:2rem;margin-bottom:10px;background:linear-gradient(90deg,#00f0ff,#b026ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:#8888aa;margin-bottom:30px}
+.controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+button{padding:14px 28px;border:none;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;transition:.3s}
+.btn-rec{background:linear-gradient(90deg,#00f0ff,#b026ff);color:#0a0a14}
+.btn-rec.recording{background:linear-gradient(90deg,#ff3c64,#ff8a3c);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,60,100,.7)}50%{box-shadow:0 0 0 15px rgba(255,60,100,0)}}
+.btn-sec{background:#1a1a2e;color:#eaeaea;border:1px solid rgba(0,240,255,.2)}
+.btn-sec:hover{border-color:#00f0ff}
+textarea{width:100%;min-height:350px;padding:20px;background:#1a1a2e;border:1px solid rgba(0,240,255,.15);border-radius:16px;color:#eaeaea;font-family:inherit;font-size:1.1rem;line-height:2;resize:vertical;outline:none}
+textarea:focus{border-color:#00f0ff;box-shadow:0 0 30px rgba(0,240,255,.15)}
+.status{padding:12px 20px;background:#1a1a2e;border-radius:12px;margin-bottom:20px;font-size:.9rem;color:#8888aa;border-right:3px solid #00f0ff}
+.status.active{border-color:#ff3c64;color:#ff3c64}
+.info{margin-top:20px;padding:20px;background:rgba(176,38,255,.08);border-radius:12px;border:1px solid rgba(176,38,255,.2);font-size:.9rem;line-height:1.9}
+.info b{color:#b026ff}
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="../index.html" class="back">← بازگشت</a>
+  <h1>🎤 تبدیل صوت به متن</h1>
+  <p class="sub">با میکروفون صحبت کن، متنش رو همین‌جا ببین. کاملاً رایگان و بدون ثبت‌نام.</p>
+
+  <div class="status" id="status">آماده برای شروع...</div>
+
+  <div class="controls">
+    <button class="btn-rec" id="recBtn">🎙️ شروع ضبط</button>
+    <button class="btn-sec" id="clearBtn">🗑️ پاک کردن</button>
+    <button class="btn-sec" id="copyBtn">📋 کپی متن</button>
+    <button class="btn-sec" id="downloadBtn">⬇️ دانلود TXT</button>
+  </div>
+
+  <textarea id="output" placeholder="متن شما اینجا ظاهر می‌شود..."></textarea>
+
+  <div class="info">
+    <b>💡 نکته:</b> از مرورگر Chrome یا Edge استفاده کن. اجازه دسترسی به میکروفون رو بده.<br>
+    <b>🌐 زبان:</b> فارسی (fa-IR) — اگر می‌خوای انگلیسی بگی، پشتیبانی می‌شه.
+  </div>
+</div>
+
+<script>
+const recBtn = document.getElementById('recBtn');
+const statusEl = document.getElementById('status');
+const output = document.getElementById('output');
+
+let recognition = null;
+let isRecording = false;
+let finalText = '';
+
+if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+  statusEl.textContent = '❌ مرورگر شما از این قابلیت پشتیبانی نمی‌کند. Chrome یا Edge استفاده کنید.';
+  statusEl.classList.add('active');
+  recBtn.disabled = true;
+} else {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SR();
+  recognition.lang = 'fa-IR';
+  recognition.continuous = true;
+  recognition.interimResults = true;
+
+  recognition.onstart = () => {
+    isRecording = true;
+    recBtn.textContent = '⏹️ توقف ضبط';
+    recBtn.classList.add('recording');
+    statusEl.textContent = '🔴 در حال ضبط... صحبت کن';
+    statusEl.classList.add('active');
+  };
+
+  recognition.onresult = (e) => {
+    let interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      const transcript = e.results[i][0].transcript;
+      if (e.results[i].isFinal) finalText += transcript + ' ';
+      else interim += transcript;
+    }
+    output.value = finalText + interim;
+  };
+
+  recognition.onerror = (e) => {
+    statusEl.textContent = '⚠️ خطا: ' + e.error;
+    stopRec();
+  };
+
+  recognition.onend = () => {
+    if (isRecording) recognition.start(); // ادامه خودکار
+    else stopRec();
+  };
+
+  function stopRec() {
+    isRecording = false;
+    recBtn.textContent = '🎙️ شروع ضبط';
+    recBtn.classList.remove('recording');
+    statusEl.classList.remove('active');
+    statusEl.textContent = '⏸️ متوقف شد. برای ادامه دکمه رو بزن.';
+  }
+
+  recBtn.addEventListener('click', () => {
+    if (isRecording) { recognition.stop(); isRecording = false; }
+    else { recognition.start(); }
+  });
+}
+
+document.getElementById('clearBtn').onclick = () => {
+  output.value = '';
+  finalText = '';
+};
+document.getElementById('copyBtn').onclick = () => {
+  navigator.clipboard.writeText(output.value);
+  alert('✅ متن کپی شد!');
+};
+document.getElementById('downloadBtn').onclick = () => {
+  const blob = new Blob([output.value], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'متن-صوتی.txt';
+  a.click();
+};
+</script>
+</body>
+</html>
