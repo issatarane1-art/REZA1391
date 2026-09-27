@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عکس به متن فارسی آنلاین رایگان (OCR) | ابزارستان</title>
+<meta name="description" content="تبدیل عکس به متن فارسی و انگلیسی به صورت آنلاین. استخراج متن از تصویر با دقت بالا و کاملاً رایگان.">
+<meta name="keywords" content="عکس به متن, OCR فارسی, تبدیل تصویر به متن, استخراج متن از عکس">
+<link rel="canonical" href="https://yourdomain.com/tools/image-to-text.html">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif}
+body{background:radial-gradient(ellipse at top,#1a1a3e,#0a0a14 60%);color:#eaeaea;min-height:100vh;padding:20px}
+.container{max-width:1000px;margin:0 auto}
+.back{color:#00f0ff;text-decoration:none;display:inline-block;margin-bottom:20px}
+h1{font-size:2rem;margin-bottom:10px;background:linear-gradient(90deg,#00f0ff,#b026ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:#8888aa;margin-bottom:30px}
+.upload-zone{border:2px dashed rgba(0,240,255,.4);border-radius:20px;padding:60px 20px;text-align:center;cursor:pointer;transition:.3s;background:rgba(0,240,255,.03);margin-bottom:20px}
+.upload-zone:hover{border-color:#00f0ff;background:rgba(0,240,255,.08)}
+.upload-zone.dragover{border-color:#b026ff;background:rgba(176,38,255,.1)}
+.upload-zone .icon{font-size:4rem;margin-bottom:15px}
+.upload-zone p{color:#8888aa;font-size:1rem}
+.upload-zone .hint{font-size:.85rem;margin-top:10px;color:#6666aa}
+#fileInput{display:none}
+.lang-row{display:flex;gap:15px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.lang-row label{color:#8888aa;font-size:.95rem}
+.lang-row select{padding:12px 20px;background:#1a1a2e;color:#eaeaea;border:1px solid rgba(0,240,255,.2);border-radius:10px;font-family:inherit;font-size:1rem;cursor:pointer}
+.preview{max-width:100%;border-radius:12px;margin:15px 0;display:none}
+.btn{padding:14px 28px;border:none;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;transition:.3s;background:linear-gradient(90deg,#00f0ff,#b026ff);color:#0a0a14}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.progress-bar{height:8px;background:#1a1a2e;border-radius:10px;margin:20px 0;overflow:hidden;display:none}
+.progress-fill{height:100%;background:linear-gradient(90deg,#00f0ff,#b026ff);width:0%;transition:.3s}
+.status{padding:15px;background:#1a1a2e;border-radius:12px;margin:15px 0;border-right:3px solid #00f0ff;font-size:.95rem}
+textarea{width:100%;min-height:280px;padding:20px;background:#1a1a2e;border:1px solid rgba(0,240,255,.15);border-radius:16px;color:#eaeaea;font-family:inherit;font-size:1.1rem;line-height:2;resize:vertical;outline:none;margin-top:20px}
+.actions{display:flex;gap:12px;margin-top:15px;flex-wrap:wrap}
+.btn-sec{padding:12px 22px;background:#1a1a2e;color:#eaeaea;border:1px solid rgba(0,240,255,.2);border-radius:10px;font-family:inherit;font-size:.95rem;cursor:pointer;transition:.3s}
+.btn-sec:hover{border-color:#00f0ff}
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="../index.html" class="back">← بازگشت</a>
+  <h1>🖼️ تبدیل عکس به متن (OCR)</h1>
+  <p class="sub">عکس یا اسکرین‌شات رو آپلود کن، متنش رو استخراج کن. پشتیبانی از فارسی و انگلیسی.</p>
+
+  <div class="lang-row">
+    <label>🌐 زبان تصویر:</label>
+    <select id="lang">
+      <option value="fas">فارسی</option>
+      <option value="eng">انگلیسی</option>
+      <option value="fas+eng">فارسی + انگلیسی</option>
+      <option value="ara">عربی</option>
+    </select>
+  </div>
+
+  <div class="upload-zone" id="uploadZone">
+    <div class="icon">📸</div>
+    <p>عکس رو بکش و اینجا رها کن یا کلیک کن</p>
+    <p class="hint">فرمت‌های مجاز: JPG, PNG, WebP, BMP</p>
+    <input type="file" id="fileInput" accept="image/*">
+  </div>
+
+  <img id="preview" class="preview">
+  <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="status" id="status" style="display:none"></div>
+
+  <textarea id="output" placeholder="متن استخراج‌شده اینجا ظاهر می‌شود..."></textarea>
+
+  <div class="actions">
+    <button class="btn-sec" id="copyBtn">📋 کپی متن</button>
+    <button class="btn-sec" id="downloadBtn">⬇️ دانلود TXT</button>
+    <button class="btn-sec" id="clearBtn">🗑️ پاک کردن</button>
+  </div>
+</div>
+
+<script>
+const zone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+const preview = document.getElementById('preview');
+const status = document.getElementById('status');
+const progressBar = document.getElementById('progressBar');
+const progressFill = document.getElementById('progressFill');
+const output = document.getElementById('output');
+
+zone.onclick = () => fileInput.click();
+zone.ondragover = (e) => { e.preventDefault(); zone.classList.add('dragover'); };
+zone.ondragleave = () => zone.classList.remove('dragover');
+zone.ondrop = (e) => {
+  e.preventDefault(); zone.classList.remove('dragover');
+  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+};
+fileInput.onchange = (e) => { if (e.target.files[0]) handleFile(e.target.files[0]); };
+
+async function handleFile(file) {
+  if (!file.type.startsWith('image/')) {
+    alert('فقط فایل تصویری مجاز است!'); return;
+  }
+  const url = URL.createObjectURL(file);
+  preview.src = url;
+  preview.style.display = 'block';
+  output.value = '';
+  progressBar.style.display = 'block';
+  status.style.display = 'block';
+  status.textContent = '⏳ در حال پردازش... اولین بار کمی طول می‌کشد (دانلود مدل زبان)';
+  progressFill.style.width = '0%';
+
+  try {
+    const lang = document.getElementById('lang').value;
+    const result = await Tesseract.recognize(file, lang, {
+      logger: m => {
+        if (m.status === 'recognizing text') {
+          progressFill.style.width = (m.progress * 100) + '%';
+          status.textContent = `⏳ در حال استخراج متن... ${Math.round(m.progress * 100)}%`;
+        }
+      }
+    });
+    output.value = result.data.text.trim() || '(متن قابل خواندن پیدا نشد)';
+    status.textContent = '✅ با موفقیت استخراج شد!';
+    progressFill.style.width = '100%';
+    setTimeout(() => progressBar.style.display = 'none', 1000);
+  } catch (err) {
+    status.textContent = '❌ خطا در پردازش: ' + err.message;
+  }
+}
+
+document.getElementById('copyBtn').onclick = () => {
+  navigator.clipboard.writeText(output.value);
+  alert('✅ کپی شد!');
+};
+document.getElementById('downloadBtn').onclick = () => {
+  const blob = new Blob([output.value], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ocr-متن.txt';
+  a.click();
+};
+document.getElementById('clearBtn').onclick = () => {
+  output.value = ''; preview.style.display = 'none'; status.style.display = 'none';
+  fileInput.value = '';
+};
+</script>
+</body>
+</html>

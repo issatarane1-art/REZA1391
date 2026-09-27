@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ساخت QR کد آنلاین رایگان | ابزارستان</title>
+<meta name="description" content="ساخت QR کد آنلاین رایگان برای لینک، متن، شماره تماس و وای‌فای. دانلود با کیفیت بالا PNG و SVG.">
+<meta name="keywords" content="QR کد, ساخت کیوآر کد, تولید QR, qr code ساز">
+<link rel="canonical" href="https://yourdomain.com/tools/qr-code.html">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif}
+body{background:radial-gradient(ellipse at top,#1a1a3e,#0a0a14 60%);color:#eaeaea;min-height:100vh;padding:20px}
+.container{max-width:1100px;margin:0 auto}
+.back{color:#00f0ff;text-decoration:none;display:inline-block;margin-bottom:20px}
+h1{font-size:2rem;margin-bottom:10px;background:linear-gradient(90deg,#00f0ff,#b026ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:#8888aa;margin-bottom:30px}
+.main{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+@media(max-width:800px){.main{grid-template-columns:1fr}}
+.panel{background:#1a1a2e;border:1px solid rgba(0,240,255,.15);border-radius:20px;padding:25px}
+.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.tab{padding:8px 18px;border-radius:50px;background:transparent;border:1px solid rgba(0,240,255,.2);color:#8888aa;cursor:pointer;font-family:inherit;font-size:.9rem;transition:.3s}
+.tab.active{background:linear-gradient(90deg,#00f0ff,#b026ff);color:#0a0a14;border-color:transparent;font-weight:700}
+.field{margin-bottom:15px}
+.field label{display:block;margin-bottom:8px;color:#8888aa;font-size:.9rem}
+.field input,.field textarea{width:100%;padding:14px 18px;background:#0a0a14;border:1px solid rgba(0,240,255,.15);border-radius:10px;color:#eaeaea;font-family:inherit;font-size:1rem;outline:none}
+.field input:focus,.field textarea:focus{border-color:#00f0ff}
+.options{margin:20px 0}
+.option-row{display:flex;align-items:center;gap:15px;margin-bottom:12px}
+.option-row label{color:#8888aa;font-size:.9rem;min-width:100px}
+.option-row input[type=color]{width:50px;height:35px;border:none;border-radius:8px;cursor:pointer;background:transparent}
+.option-row input[type=range]{flex:1}
+.qr-preview{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;background:repeating-conic-gradient(#2a2a4e 0% 25%,#1a1a2e 0% 50%) 50%/20px 20px;border-radius:16px;padding:25px}
+#qrcode{background:white;padding:20px;border-radius:12px;display:none}
+#qrcode img{display:block;max-width:100%}
+.placeholder{color:#6666aa;font-size:.95rem;text-align:center}
+.actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;justify-content:center}
+.btn{padding:12px 24px;border:none;border-radius:10px;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;background:linear-gradient(90deg,#00f0ff,#b026ff);color:#0a0a14;transition:.3s}
+.btn-sec{padding:12px 22px;background:#1a1a2e;color:#eaeaea;border:1px solid rgba(0,240,255,.2);border-radius:10px;font-family:inherit;font-size:.9rem;cursor:pointer}
+.btn:hover,.btn-sec:hover{opacity:.85}
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="../index.html" class="back">← بازگشت</a>
+  <h1>📱 ساخت QR کد</h1>
+  <p class="sub">برای لینک، متن، تماس، وای‌فای یا ایمیل QR بساز و دانلود کن.</p>
+
+  <div class="main">
+    <div class="panel">
+      <div class="tabs">
+        <button class="tab active" data-type="text">📝 متن / لینک</button>
+        <button class="tab" data-type="wifi">📶 وای‌فای</button>
+        <button class="tab" data-type="email">📧 ایمیل</button>
+        <button class="tab" data-type="phone">📞 تلفن</button>
+      </div>
+
+      <div id="formText" class="form-content">
+        <div class="field">
+          <label>متن یا لینک:</label>
+          <textarea id="textInput" rows="4" placeholder="https://example.com یا هر متنی..."></textarea>
+        </div>
+      </div>
+
+      <div id="formWifi" class="form-content" style="display:none">
+        <div class="field"><label>نام شبکه (SSID):</label><input id="wifiName" placeholder="MyWiFi"></div>
+        <div class="field"><label>رمز عبور:</label><input id="wifiPass" placeholder="password"></div>
+        <div class="field"><label>نوع امنیت:</label>
+          <select id="wifiType" style="width:100%;padding:14px;background:#0a0a14;border:1px solid rgba(0,240,255,.15);border-radius:10px;color:#eaeaea;font-family:inherit">
+            <option value="WPA">WPA/WPA2</option>
+            <option value="WEP">WEP</option>
+            <option value="nopass">بدون رمز</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="formEmail" class="form-content" style="display:none">
+        <div class="field"><label>ایمیل:</label><input id="emailTo" type="email" placeholder="example@mail.com"></div>
+        <div class="field"><label>موضوع:</label><input id="emailSub" placeholder="موضوع ایمیل"></div>
+        <div class="field"><label>متن:</label><textarea id="emailBody" rows="3" placeholder="متن ایمیل..."></textarea></div>
+      </div>
+
+      <div id="formPhone" class="form-content" style="display:none">
+        <div class="field"><label>شماره تلفن:</label><input id="phoneNum" placeholder="+989121234567"></div>
+      </div>
+
+      <div class="options">
+        <div class="option-row">
+          <label>اندازه:</label>
+          <input type="range" id="size" min="200" max="800" value="400" step="50">
+          <span id="sizeVal" style="color:#00f0ff;font-weight:700">400</span>
+        </div>
+        <div class="option-row">
+          <label>رنگ QR:</label>
+          <input type="color" id="fgColor" value="#000000">
+        </div>
+        <div class="option-row">
+          <label>رنگ پس‌زمینه:</label>
+          <input type="color" id="bgColor" value="#ffffff">
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="qr-preview">
+        <div id="qrcode"></div>
+        <p class="placeholder" id="placeholder">QR کد شما اینجا نمایش داده می‌شود</p>
+      </div>
+      <div class="actions">
+        <button class="btn" id="genBtn">✨ ساخت QR</button>
+        <button class="btn-sec" id="dlPng">⬇️ دانلود PNG</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentType = 'text';
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentType = tab.dataset.type;
+    document.querySelectorAll('.form-content').forEach(f => f.style.display = 'none');
+    document.getElementById('form' + currentType.charAt(0).toUpperCase() + currentType.slice(1)).style.display = 'block';
+  };
+});
+
+document.getElementById('size').oninput = (e) => {
+  document.getElementById('sizeVal').textContent = e.target.value;
+};
+
+function buildData() {
+  if (currentType === 'text') {
+    return document.getElementById('textInput').value.trim();
+  } else if (currentType === 'wifi') {
+    const n = document.getElementById('wifiName').value.trim();
+    const p = document.getElementById('wifiPass').value;
+    const t = document.getElementById('wifiType').value;
+    if (!n) return '';
+    return `WIFI:T:${t};S:${n};P:${p};;`;
+  } else if (currentType === 'email') {
+    const to = document.getElementById('emailTo').value.trim();
+    const sub = document.getElementById('emailSub').value;
+    const body = document.getElementById('emailBody').value;
+    if (!to) return '';
+    return `mailto:${to}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`;
+  } else if (currentType === 'phone') {
+    return 'tel:' + document.getElementById('phoneNum').value.trim();
+  }
+}
+
+document.getElementById('genBtn').onclick = async () => {
+  const data = buildData();
+  if (!data) { alert('لطفاً فیلدها را پر کن!'); return; }
+
+  const size = parseInt(document.getElementById('size').value);
+  const fg = document.getElementById('fgColor').value;
+  const bg = document.getElementById('bgColor').value;
+
+  const qrDiv = document.getElementById('qrcode');
+  qrDiv.innerHTML = '';
+  qrDiv.style.display = 'block';
+  document.getElementById('placeholder').style.display = 'none';
+
+  const canvas = document.createElement('canvas');
+  await QRCode.toCanvas(canvas, data, {
+    width: size,
+    color: { dark: fg, light: bg },
+    margin: 2,
+    errorCorrectionLevel: 'H'
+  });
+  qrDiv.appendChild(canvas);
+};
+
+document.getElementById('dlPng').onclick = () => {
+  const canvas = document.querySelector('#qrcode canvas');
+  if (!canvas) { alert('اول QR بساز!'); return; }
+  const a = document.createElement('a');
+  a.href = canvas.toDataURL('image/png');
+  a.download = 'qrcode.png';
+  a.click();
+};
+</script>
+</body>
+</html>
